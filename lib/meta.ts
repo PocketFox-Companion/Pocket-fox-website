@@ -15,8 +15,9 @@ export function pageMeta(
       url: origin + path,
       siteName: site.name,
       type: 'website',
+      images: [{ url: origin + '/og-image.png', width: 1200, height: 630, alt: 'PocketFox Companion' }],
     },
-    twitter: { card: 'summary', title, description },
+    twitter: { card: 'summary_large_image', title, description, images: [origin + '/og-image.png'] },
     robots: site.productionReady
       ? { index: true, follow: true }
       : { index: false, follow: false },

@@ -1,8 +1,19 @@
 import { sitePath } from '@/lib/paths.mjs';
+import { origin } from '@/lib/site';
 import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeControl } from '@/components/theme-control';
-export const metadata: Metadata = { icons: { icon: sitePath('/favicon.png') } };
+export const metadata: Metadata = {
+  metadataBase: new URL(origin),
+  icons: {
+    icon: [
+      { url: sitePath('/favicon.svg'), type: 'image/svg+xml' },
+      { url: sitePath('/favicon.png'), type: 'image/png', sizes: '64x64' },
+    ],
+    apple: sitePath('/apple-touch-icon.png'),
+  },
+  manifest: sitePath('/site.webmanifest'),
+};
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
