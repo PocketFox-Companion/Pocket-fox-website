@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PocketFox article editor</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f5efe3;
+        color: #2a2420;
+        font: 16px/1.6 system-ui;
+      }
+      header {
+        padding: 20px 30px;
+        border-bottom: 1px solid #ded2bc;
+      }
+      h1 {
+        font: 32px Georgia;
+        margin: 0;
+      }
+      main {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 24px;
+        padding: 24px;
+        max-width: 1300px;
+        margin: auto;
+      }
+      aside {
+        padding: 16px;
+        background: #fbf8f0;
+        border-radius: 16px;
+        height: fit-content;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+        border: 1px solid #cbb999;
+        border-radius: 8px;
+        background: #fbf8f0;
+        color: #2a2420;
+        padding: 8px 12px;
+        min-height: 42px;
+      }
+      button:hover {
+        background: #ede3d0;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid #8a441f;
+        outline-offset: 3px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin: 12px 0 4px;
+      }
+      input,
+      select,
+      textarea {
+        display: block;
+        width: 100%;
+        padding: 9px;
+        border: 1px solid #cbb999;
+        border-radius: 8px;
+        background: #fbf8f0;
+        color: #2a2420;
+      }
+      textarea {
+        min-height: 100px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 16px;
+      }
+      .toolbar,
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      .actions {
+        position: sticky;
+        bottom: 0;
+        background: #f5efe3;
+        padding: 14px 0;
+      }
+      .primary {
+        background: #395b43;
+        color: white;
+      }
+      .post {
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin: 8px 0;
+      }
+      .hint {
+        color: #726253;
+        font-size: 14px;
+      }
+      #message {
+        white-space: pre-line;
+        border-left: 3px solid #8a441f;
+        padding-left: 12px;
+      }
+      iframe {
+        width: 100%;
+        height: 700px;
+        border: 1px solid #ded2bc;
+        border-radius: 12px;
+      }
+      #body {
+        min-height: 300px;
+      }
+      .media-thumb {
+        height: 80px;
+        width: 80px;
+        object-fit: contain;
+      }
+      .full {
+        grid-column: 1/-1;
+      }
+      @media (max-width: 750px) {
+        main {
+          grid-template-columns: 1fr;
+          padding: 16px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>PocketFox editor</h1>
+      <p class="hint">
+        Your local writing space. Saving changes updates repository files; the
+        public website changes after deployment.
+      </p>
+    </header>
+    <main>
+      <aside>
+        <button id="new">＋ New article</button>
+        <div id="posts"></div>
+      </aside>
+      <section>
+        <form id="form">
+          <div id="fields"></div>
+          <label for="body">Article body</label>
+          <p class="hint">
+            Write ordinary paragraphs. Select text and use a formatting button
+            when needed.
+          </p>
+          <div class="toolbar">
+            <button type="button" data-format="heading">Heading</button
+            ><button type="button" data-format="subheading">Subheading</button
+            ><button type="button" data-format="bold">Bold</button
+            ><button type="button" data-format="italic">Italic</button
+            ><button type="button" data-format="list">List</button>
+          </div>
+          <textarea id="body" required></textarea>
+          <div class="grid">
+            <div>
+              <label for="inlineImage">Insert a library image</label
+              ><select id="inlineImage"></select>
+            </div>
+            <div>
+              <label for="inlineAlt">Image description</label
+              ><input id="inlineAlt" />
+            </div>
+          </div>
+          <button type="button" id="insertImage">Insert image</button
+          ><label for="references">References</label>
+          <p class="hint">
+            One per line: Source title | https://source-address
+          </p>
+          <textarea id="references"></textarea>
+          <div class="actions">
+            <button type="button" id="draft">Save draft</button
+            ><button type="button" class="primary" id="publish">Publish</button
+            ><button type="button" id="previewLight">Preview light</button
+            ><button type="button" id="previewDark">Preview dark</button
+            ><button type="button" id="trash">Move to trash</button>
+          </div>
+          <p id="message" role="status" aria-live="polite"></p>
+        </form>
+        <iframe
+          id="preview"
+          title="Article preview"
+          sandbox="allow-same-origin"
+          hidden
+        ></iframe>
+      </section>
+    </main>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let state = {};
+      let current = {};
+      let slugEdited = false;
+      const fields = [
+        ['title', 'Title', 'text'],
+        ['slug', 'URL name (slug)', 'text'],
+        ['date', 'Publication date', 'date'],
+        ['updated', 'Updated date (optional)', 'date'],
+        ['excerpt', 'Short introduction', 'textarea'],
+        ['category', 'Category', 'select'],
+        ['author', 'Author / byline', 'text'],
+        ['tags', 'Tags (comma-separated)', 'text'],
+        ['heroImage', 'Hero image', 'media'],
+        ['heroImageDark','Dark hero image (optional)','media'],['heroAlt', 'Hero image description', 'text'],
+        ['socialImage', 'Social image (optional)', 'media'],
+        ['seoTitle', 'Search title (optional)', 'text'],
+        ['description', 'Search description (optional)', 'textarea'],
+        ['canonical', 'Canonical URL override (optional)', 'url'],
+        ['contentNote', 'Content note (optional)', 'textarea'],
+        ['reviewer', 'Reviewer (optional; required for research)', 'text'],
+        ['related', 'Related article URL names (comma-separated)', 'text'],
+      ];
+      const container = $('fields');
+      container.className = 'grid';
+      for (const [id, label, type] of fields) {
+        const cell = document.createElement('div');
+        const l = document.createElement('label');
+        l.htmlFor = id;
+        l.textContent = label;
+        const input = document.createElement(
+          ['select', 'media'].includes(type)
+            ? 'select'
+            : type === 'textarea'
+              ? 'textarea'
+              : 'input',
+        );
+        input.id = id;
+        if (input.tagName === 'INPUT') input.type = type;
+        cell.append(l, input);
+        container.append(cell);
+      }
+      function option(select, value, label) {
+        const o = document.createElement('option');
+        o.value = value;
+        o.textContent = label;
+        select.append(o);
+      }
+      async function reload() {
+        state = await (await fetch('/api/posts')).json();
+        $('posts').replaceChildren();
+        for (const p of state.posts) {
+          const b = document.createElement('button');
+          b.className = 'post';
+          b.textContent = p.title + ' · ' + p.status;
+          b.onclick = () => load(p);
+          $('posts').append(b);
+        }
+        for (const id of ['heroImage', 'heroImageDark', 'socialImage', 'inlineImage']) {
+          $(id).replaceChildren();
+          option($(id), '', 'No image');
+          for (const m of state.media) option($(id), m, m.split('/').pop());
+        }
+        $('category').replaceChildren();
+        for (const c of state.categories)
+          option($('category'), c, c.replaceAll('-', ' '));
+      }
+      function load(p) {
+        current = p;
+        slugEdited = !!p.slug;
+        for (const [id] of fields)
+          $(id).value = Array.isArray(p[id]) ? p[id].join(', ') : p[id] || '';
+        $('body').value = p.body || '';
+        $('references').value = (p.references || [])
+          .map((r) => r.label + ' | ' + r.url)
+          .join('\n');
+        $('message').textContent =
+          p.status === 'published'
+            ? 'Published in source. Deploy the website to make changes live.'
+            : 'Draft · not included in the public site.';
+        $('preview').hidden = true;
+      }
+      function fresh() {
+        load({
+          date: new Date().toISOString().slice(0, 10),
+          category: state.categories[0],
+          status: 'draft',
+          tags: [],
+          references: [],
+          related: [],
+        });
+        slugEdited = false;
+      }
+      function collect(status) {
+        const p = {
+          _file: current._file,
+          status: status || current.status || 'draft',
+        };
+        for (const [id] of fields) p[id] = $(id).value.trim();
+        for (const k of ['tags', 'related'])
+          p[k] = p[k]
+            .split(',')
+            .map((x) => x.trim())
+            .filter(Boolean);
+        p.body = $('body').value;
+        p.references = $('references')
+          .value.split('\n')
+          .filter((x) => x.trim())
+          .map((x) => {
+            const i = x.indexOf('|');
+            return { label: x.slice(0, i).trim(), url: x.slice(i + 1).trim() };
+          });
+        return p;
+      }
+      async function action(route, data) {
+        const r = await fetch('/api/' + route, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!r.ok) {
+          const err = await r.json();
+          throw new Error(err.error);
+        }
+        return r;
+      }
+      async function save(status) {
+        try {
+          const p = collect(status);
+          const r = await (await action('save', p)).json();
+          await reload();
+          load({ ...p, _file: r.file });
+          $('message').textContent =
+            status === 'draft'
+              ? 'Draft saved. It will stay out of the public site.'
+              : 'Published in repository files. Deploy the website to make this article live.';
+        } catch (e) {
+          $('message').textContent = e.message;
+        }
+      }
+      $('title').oninput = () => {
+        if (!slugEdited)
+          $('slug').value = $('title')
+            .value.toLowerCase()
+            .normalize('NFKD')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '');
+      };
+      $('slug').oninput = () => (slugEdited = true);
+      $('new').onclick = fresh;
+      $('draft').onclick = () => save('draft');
+      $('publish').onclick = () => save('published');
+      $('form').onsubmit = (e) => e.preventDefault();
+      for (const theme of ['Light', 'Dark'])
+        $('preview' + theme).onclick = async () => {
+          try {
+            const p = collect();
+            p.theme = theme.toLowerCase();
+            $('preview').srcdoc = await (await action('preview', p)).text();
+            $('preview').hidden = false;
+            $('preview').scrollIntoView({ behavior: 'auto' });
+          } catch (e) {
+            $('message').textContent = e.message;
+          }
+        };
+      $('trash').onclick = async () => {
+        if (!current._file) return;
+        try {
+          await action('trash', { file: current._file });
+          await reload();
+          fresh();
+          $('message').textContent =
+            'Moved to content/trash. The file can be restored.';
+        } catch (e) {
+          $('message').textContent = e.message;
+        }
+      };
+      for (const b of document.querySelectorAll('[data-format]'))
+        b.onclick = () => {
+          const t = $('body'),
+            start = t.selectionStart,
+            end = t.selectionEnd,
+            selected = t.value.slice(start, end) || 'Your text';
+          const f = b.dataset.format;
+          const result =
+            f === 'bold'
+              ? '**' + selected + '**'
+              : f === 'italic'
+                ? '*' + selected + '*'
+                : f === 'heading'
+                  ? '\n\n## ' + selected + '\n\n'
+                  : f === 'subheading'
+                    ? '\n\n### ' + selected + '\n\n'
+                    : '\n\n' +
+                      selected
+                        .split('\n')
+                        .map((l) => '- ' + l)
+                        .join('\n') +
+                      '\n\n';
+          t.setRangeText(result, start, end, 'end');
+          t.focus();
+        };
+      $('insertImage').onclick = () => {
+        if (!$('inlineImage').value || !$('inlineAlt').value.trim()) {
+          $('message').textContent =
+            'Choose an image and describe it before inserting.';
+          return;
+        }
+        const t = $('body');
+        t.setRangeText(
+          '\n\n![' +
+            $('inlineAlt').value.replace(/[\[\]]/g, '') +
+            '](' +
+            $('inlineImage').value +
+            ')\n\n',
+          t.selectionStart,
+          t.selectionEnd,
+          'end',
+        );
+      };
+      reload()
+        .then(fresh)
+        .catch((e) => ($('message').textContent = e.message));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+import data from '@/content/published.json';
+export type Post = {
+  title: string;
+  slug: string;
+  date: string;
+  updated?: string;
+  status: 'draft' | 'published';
+  excerpt: string;
+  category: string;
+  tags: string[];
+  author: string;
+  heroImage?: string;
+  heroImageDark?: string;
+  heroAlt?: string;
+  socialImage?: string;
+  seoTitle?: string;
+  description?: string;
+  canonical?: string;
+  body: string;
+  references: { label: string; url: string }[];
+  contentNote?: string;
+  reviewer?: string;
+  related: string[];
+};
+export const posts = data as Post[];

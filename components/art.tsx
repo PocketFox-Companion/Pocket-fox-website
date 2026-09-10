@@ -1,0 +1,1 @@
+export function Art({src,dark,alt}:{src:string;dark?:string;alt:string}){return <span className={dark?'art-pair':''}><img className={dark?'art-light':''} src={src} alt={alt} width="600" height="400"/>{dark&&<img className="art-dark" src={dark} alt={alt} width="600" height="400"/>}</span>}

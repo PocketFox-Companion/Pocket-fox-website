@@ -1,0 +1,44 @@
+[
+  {
+    "file": "/art/fox-checklist.webp",
+    "source": "https://github.com/Faded-Fox/OCD/blob/2925866c10475bc0d69d87caa9989360d3101d93/src/assets/fox-checklist.webp",
+    "sha256": "afe122cd130d51a8cdb8110d347e03c0dc0b63b91ae7e04f63bd92da9d122bd3",
+    "usage": "Original app asset supplied through the user-designated repository; not extracted from screenshots."
+  },
+  {
+    "file": "/art/fox-intrusive-thought.webp",
+    "source": "https://github.com/Faded-Fox/OCD/blob/2925866c10475bc0d69d87caa9989360d3101d93/src/assets/fox-intrusive-thought.webp",
+    "sha256": "9f26d317a8381eb5eecf1dad7c6d6c71487233bc8d6a846834acb33055beffb8",
+    "usage": "Original app asset supplied through the user-designated repository; not extracted from screenshots."
+  },
+  {
+    "file": "/art/fox-morning.webp",
+    "source": "https://github.com/Faded-Fox/OCD/blob/2925866c10475bc0d69d87caa9989360d3101d93/src/assets/fox-morning.webp",
+    "sha256": "daa7864d8f259b8e128bfbc72c4aee7b4aeb5660361ecb678d746071aa3e5d10",
+    "usage": "Original app asset supplied through the user-designated repository; not extracted from screenshots."
+  },
+  {
+    "file": "/art/fox-obsessive-thought.webp",
+    "source": "https://github.com/Faded-Fox/OCD/blob/2925866c10475bc0d69d87caa9989360d3101d93/src/assets/fox-obsessive-thought.webp",
+    "sha256": "32e552bd7ff95d5239661617e0f07f96c770057efdd2bedab376ebbed50ba15c",
+    "usage": "Original app asset supplied through the user-designated repository; not extracted from screenshots."
+  },
+  {
+    "file": "/art/fox-quick-prompt.webp",
+    "source": "https://github.com/Faded-Fox/OCD/blob/2925866c10475bc0d69d87caa9989360d3101d93/src/assets/fox-quick-prompt.webp",
+    "sha256": "65c4d9be0d5a1c3a1496a0a136d784a2c964793bf12c79d6a477a7802cbae8d8",
+    "usage": "Original app asset supplied through the user-designated repository; not extracted from screenshots."
+  },
+  {
+    "file": "/art/fox-tail.webp",
+    "source": "https://github.com/Faded-Fox/OCD/blob/2925866c10475bc0d69d87caa9989360d3101d93/src/assets/fox-tail.webp",
+    "sha256": "6709dc01cc4d8a4f65abd15f4827c15939598937511db7fc9c7b876f20dd973a",
+    "usage": "Original app asset supplied through the user-designated repository; not extracted from screenshots."
+  },
+  {
+    "file": "/art/fox-wind-down.webp",
+    "source": "https://github.com/Faded-Fox/OCD/blob/2925866c10475bc0d69d87caa9989360d3101d93/src/assets/fox-wind-down.webp",
+    "sha256": "29184f8a33cf1384e338c6038cf0e5041f96c18479d281f6e5c3f9f3db73fba0",
+    "usage": "Original app asset supplied through the user-designated repository; not extracted from screenshots."
+  }
+]
