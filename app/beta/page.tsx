@@ -38,15 +38,32 @@ export default function Beta() {
           We won’t ask you to submit journal entries, diagnoses, symptoms, or
           other health information through the registration form.
         </p>
+        <div className="beta-map" aria-label="What the registration covers">
+          <div className="beta-map-item">
+            <span className="beta-map-number">01</span>
+            <strong>Testing focus</strong>
+            <span>Usability, ERP-informed feedback, bugs, and design.</span>
+          </div>
+          <div className="beta-map-item">
+            <span className="beta-map-number">02</span>
+            <strong>Your setup</strong>
+            <span>iPhone model, iOS version, and TestFlight comfort.</span>
+          </div>
+          <div className="beta-map-item">
+            <span className="beta-map-number">03</span>
+            <strong>Your boundaries</strong>
+            <span>Optional familiarity details, age confirmation, and contact.</span>
+          </div>
+        </div>
         <h2>Registration</h2>
         {ready ? (
           <>
             <div className="notice beta-form-intro">
               <p>
-                The registration form is hosted by Google and opens in a new
-                tab. Google processes the information you submit under its own
-                policies. The PocketFox beta team will use it to coordinate
-                testing and contact you about the beta.
+                The registration form is hosted by Google and appears below in
+                a PocketFox-styled frame. Google processes the information you
+                submit under its own policies. The PocketFox beta team will use
+                it to coordinate testing and contact you about the beta.
               </p>
               <p>
                 Retention: {site.betaRetention}. To request deletion, email{' '}
