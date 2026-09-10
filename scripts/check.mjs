@@ -35,9 +35,8 @@ function walk(dir) {
       );
       if (p.endsWith(path.join('app', 'beta', 'page.tsx')))
         assert(
-          s.includes('src={site.betaFormUrl}') &&
-            s.includes('title="PocketFox beta tester registration"'),
-          'Beta embed must use the configured Google Form URL and an accessible title',
+          s.includes('BetaSignupForm'),
+          'Beta page must include the PocketFox-native signup form',
         );
       assert(
         !/(?:src|href)=["']https?:\/\//.test(s) ||

@@ -1,6 +1,7 @@
 import { sitePath } from '@/lib/paths.mjs';
 import { pageMeta } from '@/lib/meta';
 import { site } from '@/lib/site';
+import BetaSignupForm from '@/components/BetaSignupForm';
 export const metadata = pageMeta(
   'Beta testing',
   'Learn about the upcoming PocketFox Companion beta and how registration will work.',
@@ -71,19 +72,7 @@ export default function Beta() {
                 Eligibility: {site.betaAgeRequirement}.
               </p>
             </div>
-            <div className="beta-form-frame">
-              <iframe
-                title="PocketFox beta tester registration"
-                src={site.betaFormUrl}
-                loading="lazy"
-              />
-            </div>
-            <p className="beta-form-fallback">
-              Prefer a separate window?{' '}
-              <a href={site.betaFormUrl} target="_blank" rel="noopener noreferrer">
-                Open the registration form ↗
-              </a>
-            </p>
+            <BetaSignupForm />
           </>
         ) : (
           <div className="notice">
