@@ -1,3 +1,5 @@
+> This repository is public. Drafts are excluded from the website build, but any draft committed to GitHub is publicly readable. Keep sensitive or unpublished confidential material outside the repository.
+
 # PocketFox editor
 
 Run `pnpm editor` in the website folder, then open the local address it prints. The editor is only available on your computer; it is not deployed to the public website.

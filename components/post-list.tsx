@@ -1,13 +1,14 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { Post } from '@/lib/posts';
 import { categories } from '@/lib/site';
 export function PostList({ posts }: { posts: Post[] }) {
   return posts.length ? (
     <div className="feature-grid">
       {posts.map((p) => (
-        <a className="article-card" key={p.slug} href={'/blog/' + p.slug + '/'}>
+        <a className="article-card" key={p.slug} href={sitePath('/blog/' + p.slug + '/')}>
           {p.heroImage && (
             <img
-              src={p.heroImage}
+              src={sitePath(p.heroImage)}
               alt={p.heroAlt || ''}
               width="600"
               height="400"
@@ -33,7 +34,7 @@ export function PostList({ posts }: { posts: Post[] }) {
         There are no published articles here yet. We’re preparing this reading
         space with care.
       </p>
-      <a className="text-link" href="/about/">
+      <a className="text-link" href={sitePath('/about/')}>
         Get to know PocketFox →
       </a>
     </div>

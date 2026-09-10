@@ -13,7 +13,8 @@
     "format": "oxfmt",
     "content": "node scripts/content.mjs",
     "editor": "node scripts/editor.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "build:pages": "node scripts/build-pages.mjs"
   },
   "dependencies": {
     "react": "19.2.8",

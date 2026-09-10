@@ -4,7 +4,7 @@
   "slug": "editor-welcome",
   "date": "2026-09-09",
   "status": "draft",
-  "excerpt": "A private sample for learning the editor. This draft is never included in the public website.",
+  "excerpt": "A sample for learning the editor. Excluded from the website, but visible in the public source repository.",
   "category": "pocketfox-updates",
   "tags": [],
   "author": "PocketFox",

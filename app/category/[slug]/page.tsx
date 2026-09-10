@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { notFound } from 'next/navigation';
 import { categories } from '@/lib/site';
 import { posts } from '@/lib/posts';
@@ -30,7 +31,7 @@ export default async function Category({
     <>
       <header className="page-head wrap">
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> / <a href="/blog/">Journal</a> / {c.name}
+          <a href={sitePath('/')}>Home</a> / <a href={sitePath('/blog/')}>Journal</a> / {c.name}
         </nav>
         <p className="eyebrow">From the journal</p>
         <h1>{c.name}</h1>
@@ -41,3 +42,6 @@ export default async function Category({
     </>
   );
 }
+
+export function generateStaticParams() { return categories.map(({slug}) => ({slug})); }
+export const dynamicParams = false;

@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { pageMeta } from '@/lib/meta';
 export const metadata = pageMeta(
   'Page not found',
@@ -12,7 +13,7 @@ export default function NotFound() {
       <p className="lede">
         That page isn’t here. It may have moved or may not be published yet.
       </p>
-      <a className="cta" href="/">
+      <a className="cta" href={sitePath('/')}>
         Back to PocketFox →
       </a>
     </section>

@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { pageMeta } from '@/lib/meta';
 import { posts } from '@/lib/posts';
 import { categories } from '@/lib/site';
@@ -25,7 +26,7 @@ export default function Blog() {
       <section className="wrap section">
         <nav className="category-list" aria-label="Article categories">
           {categories.map((c) => (
-            <a href={'/category/' + c.slug + '/'} key={c.slug}>
+            <a href={sitePath('/category/' + c.slug + '/')} key={c.slug}>
               {c.name}
             </a>
           ))}

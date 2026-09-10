@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { notFound } from 'next/navigation';
 import { posts } from '@/lib/posts';
 import { pageMeta } from '@/lib/meta';
@@ -62,8 +63,8 @@ export default async function Article({
     <>
       <header className="page-head wrap">
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> / <a href="/blog/">Journal</a> /{' '}
-          <a href={'/category/' + p.category + '/'}>{c?.name}</a>
+          <a href={sitePath('/')}>Home</a> / <a href={sitePath('/blog/')}>Journal</a> /{' '}
+          <a href={sitePath('/category/' + p.category + '/')}>{c?.name}</a>
         </nav>
         <p className="eyebrow">{c?.name}</p>
         <h1>{p.title}</h1>
@@ -114,3 +115,6 @@ export default async function Article({
     </>
   );
 }
+
+export function generateStaticParams() { return posts.map(({slug}) => ({slug})); }
+export const dynamicParams = false;

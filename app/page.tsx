@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { posts } from '@/lib/posts';
 import { PostList } from '@/components/post-list';
 import { site } from '@/lib/site';
@@ -31,7 +32,7 @@ export default function Home() {
             and for the life around it.
           </p>
           <div className="actions">
-            <a className="cta" href="/beta/">
+            <a className="cta" href={sitePath('/beta/')}>
               Explore the beta <ArrowRight size={18} />
             </a>
             <a className="text-link" href="#meet-pocketfox">
@@ -50,7 +51,7 @@ export default function Home() {
             Your own pace.
           </span>
           <div className="art-frame"><img
-            src="/art/fox-morning.webp"
+            src={sitePath('/art/fox-morning.webp')}
             width="256"
             height="256"
             alt="PocketFox morning journal illustration"
@@ -81,7 +82,7 @@ export default function Home() {
             stopping point. You don’t have to find a perfect answer before
             moving on.
           </p>
-          <a className="text-link" href="/about/">
+          <a className="text-link" href={sitePath('/about/')}>
             Our purpose and boundaries <ArrowRight size={17} />
           </a>
         </div>
@@ -107,7 +108,7 @@ export default function Home() {
               reflection a little shape.
             </p>
             <img
-              src="/art/fox-quick-prompt.webp"
+              src={sitePath('/art/fox-quick-prompt.webp')}
               width="280"
               height="280"
               loading="lazy"
@@ -122,7 +123,7 @@ export default function Home() {
               your writing down.
             </p>
             <img
-              src="/art/fox-wind-down.webp"
+              src={sitePath('/art/fox-wind-down.webp')}
               width="280"
               height="280"
               loading="lazy"
@@ -137,7 +138,7 @@ export default function Home() {
               intentions close to hand.
             </p>
             <img
-              src="/art/fox-checklist.webp"
+              src={sitePath('/art/fox-checklist.webp')}
               width="280"
               height="280"
               loading="lazy"
@@ -157,7 +158,7 @@ export default function Home() {
               export and share. This website has no added analytics, advertising
               pixels, or embedded forms.
             </p>
-            <a className="text-link" href="/privacy/">
+            <a className="text-link" href={sitePath('/privacy/')}>
               Read how privacy works <ArrowRight size={17} />
             </a>
           </div>
@@ -169,7 +170,7 @@ export default function Home() {
             <p className="eyebrow">The PocketFox journal</p>
             <h2>Room for a different perspective.</h2>
           </div>
-          <a className="text-link" href="/blog/">
+          <a className="text-link" href={sitePath('/blog/')}>
             Visit the journal <ArrowRight size={17} />
           </a>
         </div>
@@ -188,7 +189,7 @@ export default function Home() {
       </section>
       <section className="wrap beta-panel">
         <img
-          src="/art/fox-tail.webp"
+          src={sitePath('/art/fox-tail.webp')}
           width="150"
           height="150"
           loading="lazy"
@@ -205,7 +206,7 @@ export default function Home() {
             Learn about the upcoming PocketFox beta and what taking part will
             involve.
           </p>
-          <a className="cta" href="/beta/">
+          <a className="cta" href={sitePath('/beta/')}>
             About beta testing <ArrowRight size={18} />
           </a>
         </div>

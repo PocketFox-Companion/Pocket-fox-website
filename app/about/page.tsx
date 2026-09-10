@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { pageMeta } from '@/lib/meta';
 import { site } from '@/lib/site';
 export const metadata = pageMeta(
@@ -53,7 +54,7 @@ export default function About() {
           It does not promise symptom improvement, make treatment decisions, or
           provide emergency support.
         </p>
-        <a href="/privacy/">Read the privacy policy</a>
+        <a href={sitePath('/privacy/')}>Read the privacy policy</a>
       </article>
     </>
   );

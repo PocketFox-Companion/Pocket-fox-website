@@ -59,12 +59,10 @@ export default function Privacy() {
           clear it by clearing this site’s browser data.
         </p>
         <p>
-          This preview uses OpenAI Sites and its hosting infrastructure.
+          This public preview is hosted on GitHub Pages.
           Requests necessarily include technical information such as an IP
-          address, requested URL, and browser headers. Platform access checks
-          and operational logs may be handled by the host. We do not claim that
-          hosting involves no technical data processing. Exact hosting retention
-          and access terms must be reviewed before public launch.
+          address, requested URL, and browser headers. GitHub may process technical information and operational logs as described in its privacy statement. We do not claim that
+          hosting involves no technical data processing. See the{' '}<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noreferrer">GitHub privacy statement</a>{' '}for how the host handles this information.
         </p>
         <h2>3. Optional beta registration</h2>
         <p>

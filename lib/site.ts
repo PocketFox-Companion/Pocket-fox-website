@@ -12,5 +12,5 @@ export const site = {
   disclaimer:
     'PocketFox provides educational and self-management support. It is not diagnosis, treatment, or a replacement for a licensed clinician.',
 };
-export const origin = site.productionReady ? site.domain : site.previewOrigin;
+export const origin = process.env.NEXT_PUBLIC_SITE_ORIGIN || (site.productionReady ? site.domain : site.previewOrigin);
 export { default as categories } from '../content/categories.json';

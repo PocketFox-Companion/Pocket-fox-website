@@ -1,3 +1,4 @@
+import { sitePath } from '@/lib/paths.mjs';
 import { pageMeta } from '@/lib/meta';
 import { site } from '@/lib/site';
 export const metadata = pageMeta(
@@ -77,7 +78,7 @@ export default function Beta() {
           </div>
         )}
         <p>
-          <a href="/privacy/">Read the privacy policy before registering</a>.
+          <a href={sitePath('/privacy/')}>Read the privacy policy before registering</a>.
         </p>
         <p>{site.disclaimer}</p>
       </article>
