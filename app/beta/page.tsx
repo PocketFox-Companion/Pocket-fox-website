@@ -41,7 +41,7 @@ export default function Beta() {
         <h2>Registration</h2>
         {ready ? (
           <>
-            <div className="notice">
+            <div className="notice beta-form-intro">
               <p>
                 The registration form is hosted by Google and opens in a new
                 tab. Google processes the information you submit under its own
@@ -54,14 +54,19 @@ export default function Beta() {
                 Eligibility: {site.betaAgeRequirement}.
               </p>
             </div>
-            <a
-              className="cta"
-              href={site.betaFormUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Google registration form ↗
-            </a>
+            <div className="beta-form-frame">
+              <iframe
+                title="PocketFox beta tester registration"
+                src={site.betaFormUrl}
+                loading="lazy"
+              />
+            </div>
+            <p className="beta-form-fallback">
+              Prefer a separate window?{' '}
+              <a href={site.betaFormUrl} target="_blank" rel="noopener noreferrer">
+                Open the registration form ↗
+              </a>
+            </p>
           </>
         ) : (
           <div className="notice">

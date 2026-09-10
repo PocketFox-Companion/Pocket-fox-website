@@ -452,6 +452,25 @@ select:focus-visible {
   color: var(--secondary);
   max-width: 30rem;
 }
+.beta-form-frame {
+  margin: 2rem 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 12px 36px rgb(53 45 37 / 8%);
+}
+.beta-form-frame iframe {
+  display: block;
+  width: 100%;
+  min-height: 1500px;
+  border: 0;
+  background: var(--surface);
+}
+.beta-form-fallback {
+  font-size: 0.9rem;
+  color: var(--secondary);
+}
 .disclaimer {
   font-size: 0.8rem;
   color: var(--secondary);

@@ -66,16 +66,16 @@ export default function Privacy() {
         </p>
         <h2>3. Optional beta registration</h2>
         <p>
-          No beta form is currently active. When registration opens, it will use
-          an ordinary outbound link to Google Forms. The form will not be
-          embedded and Google form resources will not load while you browse
-          PocketFox pages.
+          Beta registration uses a separate Google Form. It asks for a name or
+          preferred name, an email address, device and testing preferences, and
+          optional feedback. The form does not ask for journal entries,
+          diagnoses, symptoms, or details of intrusive thoughts.
         </p>
         <p>
-          The form will explain what information is requested, why the beta team
-          needs it, who can access it, how long it is retained, and how to
-          request deletion. Please do not include health information or journal
-          content.
+          Information is used only to coordinate beta testing and follow-up,
+          retained only as long as needed for that purpose, and handled under
+          Google’s policies. Please do not include health information or journal
+          content. To request deletion, contact the address below.
         </p>
         <h2>4. Contact and deletion requests</h2>
         {site.privacyEmail ? (

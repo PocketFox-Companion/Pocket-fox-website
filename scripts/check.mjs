@@ -28,11 +28,17 @@ function walk(dir) {
     } else if (/\.(tsx?|m?js|css|html)$/.test(p)) {
       const s = fs.readFileSync(p, 'utf8');
       assert(
-        !/next\/font\/google|fonts\.googleapis|googletagmanager|google-analytics|hotjar|<iframe/i.test(
+        !/next\/font\/google|fonts\.googleapis|googletagmanager|google-analytics|hotjar/i.test(
           s,
         ),
         'Unexpected third-party resource in ' + p,
       );
+      if (p.endsWith(path.join('app', 'beta', 'page.tsx')))
+        assert(
+          s.includes('src={site.betaFormUrl}') &&
+            s.includes('title="PocketFox beta tester registration"'),
+          'Beta embed must use the configured Google Form URL and an accessible title',
+        );
       assert(
         !/(?:src|href)=["']https?:\/\//.test(s) ||
           !/<(?:script|link|img)[^>]+(?:src|href)=["']https?:\/\//.test(s),
