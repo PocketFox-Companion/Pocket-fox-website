@@ -1,24 +1,24 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 
 const formAction =
   'https://docs.google.com/forms/d/e/1FAIpQLSfX3VdaGNK92KGduD97DCK-nq961AFd06X87t5OOMveym0l_g/formResponse';
 
 export default function BetaSignupForm() {
   const [submitted, setSubmitted] = useState(false);
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = () => {
     window.setTimeout(() => setSubmitted(true), 700);
   };
   return (
     <>
       <iframe name="pocketfox-form-submit" title="Hidden form submission target" className="visually-hidden" />
       {submitted ? (
-        <div className="beta-success" role="status">
+        <output className="beta-success">
           <p className="eyebrow">Thank you 🦊</p>
           <h3>You’re on the PocketFox beta list.</h3>
           <p>We’ll follow up by email with TestFlight details and next steps.</p>
-        </div>
+        </output>
       ) : (
         <form className="pocketfox-form" action={formAction} method="POST" target="pocketfox-form-submit" onSubmit={onSubmit}>
           <fieldset>
