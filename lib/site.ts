@@ -7,7 +7,7 @@ export const site = {
   betaFormUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSfX3VdaGNK92KGduD97DCK-nq961AFd06X87t5OOMveym0l_g/viewform?usp=publish-editor',
   contactEmail: 'hello@nomadicpaws.co',
-  privacyEmail: 'hello@nomadicpaws.co',
+  privacyEmail: 'hello@pocketfoxcompanion.com',
   betaRetention:
     'only as long as needed to coordinate beta testing and follow-up',
   betaAgeRequirement: 'you must be 18 years of age or older',
